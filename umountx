@@ -1,13 +1,22 @@
-#!/bin/sh
+#!/bin/bash
+#___________________________________________________________________________
+#  umountx	 https://github.com/Bash-Life @philmcrakin
+#___________________________________________________________________________
 #
-# mountx version 0.1 2022/27/08 git@github.com:philmcrakin/
-#
-# check for root/sudo
+# check for root/sudo. Using different code to check
+# here than I used in the mountx.sh I'm just demonstrating
+# and experimenting with different methods.
+
 [ $(sudo whoami) == "root" ] || (echo "Please run with sudo" && exit 1);
-# Yes, different code to check for root/sudo here than mountx.
-# Im experimenting. with various methods Gotta love Bash.
 sudo umount /dev/mapper/*map-point*;
 sudo cryptsetup luksClose *map-point*
+
+# END OF SCRIPT *** This closed and locks the enrypted device
+#
+#___________________________________________________________________________
+# INSTRUCTIONS EXPLANATIONS & EXAMPLES
+#___________________________________________________________________________
+#
 #
 #***************************************************************************
 # If it's mounted already, ls /dev/mapper to see your devices/partitions.
@@ -17,15 +26,15 @@ sudo cryptsetup luksClose *map-point*
 #
 #***************************************************************************
 # Place this file in your $PATH to enable it as a bash command
-# call it from the terminal as root or 'sudo mountx'
+# call it from the terminal as root or 'sudo umountx'
 #***************************************************************************
 #
 #
 #***************************************************************************
 # optionally edit your /etc/sudoers  or visudo /etc/sudoers.d/mountx_umountx
-# and add the following lines:
-# ALL     ALL = NOPASSWD: /home/deez/scripts/mountx
-# ALL     ALL = NOPASSWD: /home/deez/scripts/umountx
+# and add the following lines: ( With your own username/path ofcourse )
+#      ALL     ALL = NOPASSWD: /home/user/.scripts/mountx
+#      ALL     ALL = NOPASSWD: /home/user/.scripts/umountx
 #***************************************************************************
 #
 #
@@ -47,10 +56,8 @@ sudo cryptsetup luksClose *map-point*
 # name you choose for mountpoint. Besure you get mountx from this repo to
 # add the mount capabilities.
 #
+#
 #***************************************************************************
+#	https://github.com/philmcrakin/Bash_Scripts_and_Other_BS
 #***************************************************************************
-echo -en "e[1;37m\e[44mhttps://github.com/philmcrakin/Bash_Scripts_and_Other_BS\033[0m"
-#***************************************************************************
-#***************************************************************************
-
 

@@ -1,15 +1,25 @@
-#!/bin/sh
+#!/bin/bash
 #
-# mountx version 0.1 2022/27/08 git@github.com:philmcrakin/
+#_________________________________________________________________________
+# mountx version  2022/27/08  https://github.com/Bash-Life @philmcrakin
+#_________________________________________________________________________
 #
 # check for root/sudo
+
 if [ "`id -u`" -ne 0 ]; then
- echo "Switching from `id -un` to root"
- exec sudo "$0"
- exit 99
+   echo "Switching from `id -un` to root"
+   exec sudo "$0"
+   exit 99
 fi
 cryptsetup luksOpen /dev/sd* *map-point*
 mount /dev/mapper/*map-point* /home/*username*/*map-point*
+
+#  END OF SCRIPT   ****  device should be decrypted, mounted and accesible
+#
+#___________________________________________________________________________
+# INSTRUCTIONS EXPLANATIONS & EXAMPLES
+#___________________________________________________________________________
+#
 #
 #***************************************************************************
 # make sure to replace sd* with your device/partition (ex: /dev/sdb2 )
@@ -31,20 +41,20 @@ mount /dev/mapper/*map-point* /home/*username*/*map-point*
 #
 #
 #***************************************************************************
-# optionally edit your /etc/sudoers  or visudo/etc/sudoers.d/mountx_umountx
+# optionally edit your /etc/sudoers OR visudo /etc/sudoers.d/mountx_umountx
 # and add the following lines:
-# ALL     ALL = NOPASSWD: /home/deez/scripts/mountx
-# ALL     ALL = NOPASSWD: /home/deez/scripts/umountx
+# ALL     ALL = NOPASSWD: /home/user/.scripts/mountx
+# ALL     ALL = NOPASSWD: /home/user/.scripts/umountx
 #***************************************************************************
 #
 #
 # Easily add custom commands to Thunar or other GUI apps to give
-# right click context menu options.
+# right click menu context options.
 #
 # Create a mount point for the encrypted drive if you don't already have one:
 # Ex: mkdir ~/Backups
 #
-# In the file manager on  the menu bar:
+# In the file manager on the menu bar:
 # Edit>Configure Custom Actions>       Click the +
 # Name: 'Mount Encrypted Device Here'
 # Descr: 'Mount an encrypted partition to this directory'
@@ -57,12 +67,14 @@ mount /dev/mapper/*map-point* /home/*username*/*map-point*
 # Tick the Directories box and click ok to save. This is will ensure that the
 # mountx command is only available if you right click on a DIRECTORY with the
 # name you choose for mountpoint. Besure you get umountx from this repo to
-# add the umount capabilities.
+# add the umount and close/lock capabilities.
+#
+#
+# If you have any suggestions for improvement please let me know.
+#
 #
 #***************************************************************************
-#***************************************************************************
-echo -en "e[1;37m\e[44mhttps://github.com/philmcrakin/Bash_Scripts_and_Other_BS\033[0m"
-#***************************************************************************
+#   https://github.com/philmcrakin/Bash_Scripts_and_Other_BS
 #***************************************************************************
 
 
